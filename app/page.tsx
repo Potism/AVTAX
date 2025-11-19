@@ -1,4 +1,9 @@
-import { TaxCalculator } from '@/components/tax-calculator'
+"use client";
+
+import { TaxCalculator } from "@/components/tax-calculator";
+import { InvoiceGenerator } from "@/components/invoice-generator";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Calculator, FileText } from "lucide-react";
 
 export default function Page() {
   return (
@@ -9,16 +14,34 @@ export default function Page() {
             AV Production Tax Calculator
           </h1>
           <p className="text-pretty text-lg text-muted-foreground">
-            Calcola quanto mettere da parte per le tasse e il tuo guadagno netto
+            Calcola quanto mettere da parte per le tasse e genera fatture con
+            calcoli precisi
           </p>
         </header>
-        
-        <TaxCalculator />
-        
-        <footer className="mt-12 text-center text-sm text-muted-foreground">
-          
-        </footer>
+
+        <Tabs defaultValue="calculator" className="w-full">
+          <TabsList className="mb-6 w-full sm:w-auto">
+            <TabsTrigger value="calculator" className="flex items-center gap-2">
+              <Calculator className="size-4" />
+              Calcolatore Tasse
+            </TabsTrigger>
+            <TabsTrigger value="invoice" className="flex items-center gap-2">
+              <FileText className="size-4" />
+              Genera Fattura
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="calculator">
+            <TaxCalculator />
+          </TabsContent>
+
+          <TabsContent value="invoice">
+            <InvoiceGenerator />
+          </TabsContent>
+        </Tabs>
+
+        <footer className="mt-12 text-center text-sm text-muted-foreground"></footer>
       </div>
     </div>
-  )
+  );
 }
